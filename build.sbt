@@ -80,12 +80,12 @@ lazy val root = (project in file("."))
 lazy val library =
   new {
     object Version {
-      val circe         = "0.11.1"
+      val circe         = "0.14.1"
       val scalaCheck    = "1.14.0"
-      val scalaTest     = "3.0.5"
-      val sttp          = "1.5.9"
+      val scalaTest     = "3.0.8"
+      val sttp          = "1.6.3"
       val spongyCastle  = "1.58.0.0"
-      val kindProjector = "0.9.9"
+      val kindProjector = "0.10.3"
       val logback       = "1.2.3"
     }
     val circeCore           = "io.circe"                   %% "circe-core"                       % Version.circe
@@ -96,7 +96,7 @@ lazy val library =
     val spongyCastleCore    = "com.madgag.spongycastle"    %  "core"                             % Version.spongyCastle
     val scalaCheck          = "org.scalacheck"             %% "scalacheck"                       % Version.scalaCheck
     val scalaTest           = "org.scalatest"              %% "scalatest"                        % Version.scalaTest
-    val kindProjector       = "org.spire-math"             %% "kind-projector"                   % Version.kindProjector
+    val kindProjector       = "org.typelevel"              %% "kind-projector"                   % Version.kindProjector
     val logback             = "ch.qos.logback"             %  "logback-classic"                  % Version.logback
 
 
@@ -115,7 +115,7 @@ lazy val tagName = Def.setting{
 }
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.13.7",
+  scalaVersion := "2.13.6",
   organization := "co.upvest",
   scalacOptions ++= Seq(
     "-unchecked",
