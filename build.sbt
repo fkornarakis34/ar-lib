@@ -115,7 +115,7 @@ lazy val tagName = Def.setting{
 }
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.12.8",
+  scalaVersion := "2.13.7",
   organization := "co.upvest",
   scalacOptions ++= Seq(
     "-unchecked",
