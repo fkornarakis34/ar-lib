@@ -1,4 +1,4 @@
-package co.upvest.arweave4s.adt
+package co.copperexchange.ar.adt
 
 import java.security.interfaces.RSAKey
 import co.upvest.arweave4s.utils.{CryptoUtils, UnsignedBigInt}

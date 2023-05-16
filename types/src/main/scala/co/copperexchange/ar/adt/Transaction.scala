@@ -1,6 +1,6 @@
-package co.upvest.arweave4s.adt
+package co.copperexchange.ar.adt
 
-import co.upvest.arweave4s.utils.CryptoUtils
+import co.copperexchange.ar.utils.CryptoUtils
 
 final case class Transaction(
   lastTx: Option[Transaction.Id],

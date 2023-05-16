@@ -1,4 +1,4 @@
-package co.upvest.arweave4s.adt
+package co.copperexchange.ar.adt
 
 import java.security.SecureRandom
 import java.security.interfaces.{RSAPrivateCrtKey, RSAPublicKey}

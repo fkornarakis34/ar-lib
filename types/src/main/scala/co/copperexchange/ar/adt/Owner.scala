@@ -1,10 +1,10 @@
-package co.upvest.arweave4s.adt
+package co.copperexchange.ar.adt
 
 import java.security.KeyFactory
 import java.security.interfaces.RSAPublicKey
 import java.security.spec.RSAPublicKeySpec
 
-import co.upvest.arweave4s.utils.{CryptoUtils, UnsignedBigInt}
+import co.copperexchange.ar.utils.{CryptoUtils, UnsignedBigInt}
 
 case class Owner(n: BigInt) {
   lazy val bytes                  = UnsignedBigInt.toBigEndianBytes(n)

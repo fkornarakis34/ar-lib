@@ -1,4 +1,4 @@
-package co.upvest.arweave4s.api
+package co.copperexchange.ar.api
 
 import co.upvest.arweave4s.adt.{Address, Transaction, Winston}
 import co.upvest.arweave4s.marshalling.Marshaller

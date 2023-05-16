@@ -1,4 +1,4 @@
-package co.upvest.arweave4s.utils
+package co.copperexchange.ar.utils
 
 import java.security.MessageDigest
 import java.util.Base64

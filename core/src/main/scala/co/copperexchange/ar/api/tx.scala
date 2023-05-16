@@ -1,4 +1,4 @@
-package co.upvest.arweave4s.api
+package co.copperexchange.ar.api
 
 import cats.Monad
 import cats.syntax.applicative._

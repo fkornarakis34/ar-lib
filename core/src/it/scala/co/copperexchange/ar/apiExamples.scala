@@ -10,9 +10,11 @@ import com.softwaremill.sttp.HttpURLConnectionBackend
 import com.softwaremill.sttp.asynchttpclient.future.AsyncHttpClientFutureBackend
 import org.scalatest.concurrent.{Eventually, ScalaFutures}
 import org.scalatest.tagobjects.{Retryable, Slow}
-import org.scalatest.{Tag => _, _}
-
+import org.scalatest.{Tag ⇒ _, _}
 import scala.concurrent.{ExecutionContext, Future}
+
+import co.copperexchange.ar.api
+import co.copperexchange.ar.api.address
 
 class apiExamples extends WordSpec
   with Matchers with GivenWhenThen with Eventually
@@ -39,7 +41,7 @@ class apiExamples extends WordSpec
       And("that it has enough funds in it")
       val reward = randomWinstons()
       val requiredFunds = reward + quantity
-      api.address.balance(wallet) should be >= requiredFunds
+      address.balance(wallet) should be >= requiredFunds
       Given("a freshly generated wallet")
       val beneficiary = Wallet.generate()
 

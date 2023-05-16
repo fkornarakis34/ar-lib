@@ -1,6 +1,6 @@
 package co.upvest.arweave4s
 
-import co.upvest.arweave4s.adt.{Data, Winston}
+import co.copperexchange.ar.adt.{Data, Winston}
 
 import scala.util.Random
 

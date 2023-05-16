@@ -1,4 +1,4 @@
-package co.upvest.arweave4s
+package co.copperexchange.ar
 
 import cats.evidence.As
 import cats.data.NonEmptyList

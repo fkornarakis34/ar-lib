@@ -1,8 +1,10 @@
-package co.upvest.arweave4s.adt
+package co.copperexchange.ar.adt
 
 import co.upvest.arweave4s.utils.CryptoUtils
 import io.circe.Json
 import scala.util.Try
+
+import co.copperexchange.ar.utils.CryptoUtils
 
 case class Block(nonce:         String,
                  previousBlock: Option[Block.IndepHash],

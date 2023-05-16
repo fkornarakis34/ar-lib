@@ -3,18 +3,19 @@ package co.upvest.arweave4s
 import cats.arrow.FunctionK
 import cats.data.{EitherT, NonEmptyList}
 import cats.implicits._
-import cats.{Id, Monad, ~>}
+import cats.{~>, Id, Monad}
 import co.upvest.arweave4s.adt._
 import co.upvest.arweave4s.utils.{BlockchainPatience, MultipleHostsBackend}
 import com.softwaremill.sttp.asynchttpclient.future.AsyncHttpClientFutureBackend
-import com.softwaremill.sttp.{HttpURLConnectionBackend, TryHttpURLConnectionBackend, SttpBackendOptions}
+import com.softwaremill.sttp.{HttpURLConnectionBackend, SttpBackendOptions, TryHttpURLConnectionBackend}
 import org.scalatest.concurrent.{Eventually, ScalaFutures}
 import org.scalatest.tagobjects.{Retryable, Slow}
 import org.scalatest.{Inside, Matchers, Retries, WordSpec}
-
 import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
 import scala.util.Try
+
+import co.copperexchange.ar.api.address
 
 class apiSpec extends WordSpec
   with Matchers with Inside with ScalaFutures

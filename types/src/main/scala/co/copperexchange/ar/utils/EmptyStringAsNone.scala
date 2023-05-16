@@ -1,4 +1,4 @@
-package co.upvest.arweave4s.utils
+package co.copperexchange.ar.utils
 
 import io.circe.{Decoder, Encoder, Json}
 import io.circe.syntax._

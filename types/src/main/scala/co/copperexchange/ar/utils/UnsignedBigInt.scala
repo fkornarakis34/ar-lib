@@ -1,4 +1,4 @@
-package co.upvest.arweave4s.utils
+package co.copperexchange.ar.utils
 
 object UnsignedBigInt {
   def ofBigEndianBytes(bs: Array[Byte]): Option[BigInt] =
