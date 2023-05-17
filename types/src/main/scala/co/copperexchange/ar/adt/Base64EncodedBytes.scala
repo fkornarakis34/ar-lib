@@ -2,7 +2,7 @@ package co.copperexchange.ar.adt
 
 import java.util.Arrays
 
-import co.upvest.arweave4s.utils.CryptoUtils
+import co.copperexchange.ar.utils.CryptoUtils
 
 abstract class Base64EncodedBytes {
   def bytes: Array[Byte]

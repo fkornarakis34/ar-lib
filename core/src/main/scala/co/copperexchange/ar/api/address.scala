@@ -1,13 +1,11 @@
 package co.copperexchange.ar.api
 
-import co.upvest.arweave4s.adt.{Address, Transaction, Winston}
-import co.upvest.arweave4s.marshalling.Marshaller
+import co.copperexchange.ar.adt.{Address, Transaction, Winston}
 import com.softwaremill.sttp.sttp
 
 object address {
 
-  import Marshaller._
-  import co.upvest.arweave4s.utils.SttpExtensions.syntax._
+  import co.copperexchange.ar.marshalling.Marshaller._
 
   def lastTx[F[_]](address: Address)(implicit send: Backend[F], esh: EncodedStringHandler[F]): F[Option[Transaction.Id]] =
     esh(

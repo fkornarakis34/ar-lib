@@ -1,8 +1,8 @@
 package co.upvest.arweave4s.adt
 
-import co.upvest.arweave4s.utils.CryptoUtils
+import co.copperexchange.ar.adt.{Address, Block, Transaction, Wallet, WalletResponse, Winston}
+import co.copperexchange.ar.utils.CryptoUtils
 import io.circe.syntax._
-
 import org.scalacheck.{Arbitrary, Gen}
 
 trait ArbitraryInstances {

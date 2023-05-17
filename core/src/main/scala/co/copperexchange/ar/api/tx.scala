@@ -4,8 +4,8 @@ import cats.Monad
 import cats.syntax.applicative._
 import cats.syntax.flatMap._
 import cats.syntax.functor._
-import co.upvest.arweave4s.adt.{Signed, Transaction}
-import co.upvest.arweave4s.marshalling.Marshaller
+import co.copperexchange.ar.adt.{Signed, Transaction}
+import co.copperexchange.ar.marshalling.Marshaller
 import com.softwaremill.sttp.circe._
 import com.softwaremill.sttp.{DeserializationError, asString, sttp}
 import io.circe.parser.decode

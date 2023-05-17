@@ -1,8 +1,8 @@
 package co.upvest.arweave4s.adt
 
-import co.upvest.arweave4s.marshalling.Marshaller
+import co.copperexchange.ar.marshalling.Marshaller
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.scalatest.{WordSpec, Matchers}
+import org.scalatest.{Matchers, WordSpec}
 import io.circe.syntax._
 
 class BlockSpec extends WordSpec

@@ -1,6 +1,5 @@
 package co.copperexchange.ar.adt
 
-import co.upvest.arweave4s.utils.CryptoUtils
 import io.circe.Json
 import scala.util.Try
 

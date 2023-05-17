@@ -9,7 +9,7 @@ final case class Transaction(
   data: Option[Base64EncodedBytes],
   tags: Option[Seq[Tag.Custom]],
   target: Option[Address],
-  quantity: Winston,
+  quantity: Winston
 ) extends Signable {
   lazy val signingData = Array.concat(
     owner.bytes,
@@ -56,7 +56,7 @@ object Transaction {
     owner: Owner,
     reward: Winston,
     target: Address,
-    quantity: Winston,
+    quantity: Winston
   ): Transaction = Transaction(
     lastTx,
     owner,
