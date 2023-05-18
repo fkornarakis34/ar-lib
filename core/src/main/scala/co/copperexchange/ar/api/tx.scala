@@ -13,7 +13,7 @@ import cats.syntax.either._
 
 object tx {
   import Marshaller._
-  import co.upvest.arweave4s.utils.SttpExtensions.syntax._
+  import co.copperexchange.ar.utils.SttpExtensions.syntax._
 
   def get[F[_] : Monad](txId: Transaction.Id)(implicit send: Backend[F], jh: JsonHandler[F]):
     F[Transaction.WithStatus] = send(sttp.get("tx" :: s"$txId" :: Nil)

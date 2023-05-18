@@ -59,7 +59,6 @@ lazy val core = (project in file("core"))
       library.sttpCore          % Compile,
       library.sttpCirce         % Compile,
       library.scalaCompile,
-      library.spaceGoat,
       // test dependencies
       library.scalaCheck        % "it",
       library.scalaTest         % "it",
@@ -87,7 +86,7 @@ lazy val library =
       val scalaTest     = "3.0.8"
       val sttp          = "1.6.3"
       val spongyCastle  = "1.58.0.0"
-      val kindProjector = "0.9.10"
+      val kindProjector = "0.13.2"
       val logback       = "1.2.3"
       val scalaComp = "2.13.6"
     }
@@ -99,10 +98,9 @@ lazy val library =
     val spongyCastleCore    = "com.madgag.spongycastle"    %  "core"                             % Version.spongyCastle
     val scalaCheck          = "org.scalacheck"             %% "scalacheck"                       % Version.scalaCheck
     val scalaTest           = "org.scalatest"              %% "scalatest"                        % Version.scalaTest
-    val kindProjector       = "org.spire-math"             % "kind-projector_2.13.0-RC1"         % Version.kindProjector
+    val kindProjector       = "org.typelevel"             % "kind-projector_2.13.10"         % Version.kindProjector
     val logback             = "ch.qos.logback"             %  "logback-classic"                  % Version.logback
     val scalaCompile        = "org.scala-lang"             % "scala-compiler"                    % Version.scalaComp
-    val spaceGoat           = "com.sksamuel.scapegoat"     % "scalac-scapegoat-plugin_2.13.3"    % "1.4.6"
 
 
     // All exclusions that should be applied to every module
@@ -120,16 +118,15 @@ lazy val tagName = Def.setting{
 }
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.13.1",
+  scalaVersion := "2.13.10",
   organization := "co.copperexchange",
   scalacOptions ++= Seq(
     "-unchecked",
     "-deprecation",
     "-language:_",
-    "-target:jvm-1.8",
     "-encoding", "UTF-8",
     "-Xfatal-warnings",
-    "-Ywarn-dead-code"
+    "-Ywarn-dead-code",
   ),
   scalacOptions in (Compile, console) ~= {
     _ filterNot (_ == "-Ywarn-unused-import")

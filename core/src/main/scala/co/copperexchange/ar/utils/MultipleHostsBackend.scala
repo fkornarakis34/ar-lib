@@ -46,31 +46,3 @@ class MultipleHostsBackend[R[_], G[_]](
     }
   }
 }
-
-object MultipleHostsBackend {
-
-  def apply[R[_]: Monad : RaiseError[?[_], NonEmptyList[Throwable]], G[_]](
-    b: SttpBackend[G, Nothing],
-    uris: NonEmptyList[Uri],
-    permute: NonEmptyList[Uri] => NonEmptyList[Uri]
-  )(implicit i: G ~> R) = new MultipleHostsBackend(b, uris, permute)
-
-  def apply[F[_]: Monad : RaiseError[?[_], NonEmptyList[Throwable]]](
-    b: SttpBackend[F, Nothing],
-    uris: NonEmptyList[Uri],
-    permute: NonEmptyList[Uri] => NonEmptyList[Uri]
-  ) = {
-    implicit val i = FunctionK.id[F]
-    new MultipleHostsBackend(b, uris, permute)
-  }
-
-  val uniform: NonEmptyList[Uri] => NonEmptyList[Uri] = { nl =>
-    val l = Random.shuffle(nl.toList)
-    NonEmptyList(l.head, l.tail)
-  }
-
-  def retry(n:Int): NonEmptyList[Uri] => NonEmptyList[Uri] =
-    _ >>= { e =>
-      NonEmptyList(e, List.fill(n)(e))
-    }
-}

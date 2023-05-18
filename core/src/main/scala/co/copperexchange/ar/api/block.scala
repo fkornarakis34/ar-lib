@@ -3,10 +3,13 @@ package co.copperexchange.ar.api
 import com.softwaremill.sttp.circe.asJson
 import com.softwaremill.sttp.sttp
 import cats.Functor
+import co.copperexchange.ar.marshalling.Marshaller
 import cats.syntax.functor._
 import co.copperexchange.ar.adt.{Address, Block, WalletResponse}
 
 object block {
+  import Marshaller._
+  import co.copperexchange.ar.utils.SttpExtensions.syntax._
   def current[F[_]]()(implicit send: Backend[F], jh: JsonHandler[F]): F[Block] = jh(
     send(sttp.get("current_block" :: Nil) response asJson[Block])
   )
