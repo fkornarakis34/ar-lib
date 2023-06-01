@@ -1,4 +1,4 @@
-package co.upvest.arweave4s.adt
+package co.copperexchange.ar.adt
 
 import java.math.BigInteger
 import java.security.{KeyFactory, KeyPairGenerator, SecureRandom}
@@ -6,7 +6,7 @@ import java.security.interfaces.{RSAPrivateCrtKey, RSAPublicKey}
 import java.security.spec.{RSAKeyGenParameterSpec, RSAPrivateCrtKeySpec, RSAPublicKeySpec, PKCS8EncodedKeySpec}
 import java.nio.file.{Files, Path, Paths}
 
-import co.upvest.arweave4s.utils.UnsignedBigIntMarshallers
+import co.copperexchange.ar.utils.UnsignedBigIntMarshallers
 import io.circe.parser._
 import io.circe.syntax._
 import io.circe.{Decoder, Encoder, Json}

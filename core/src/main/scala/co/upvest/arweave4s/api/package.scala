@@ -1,4 +1,4 @@
-package co.upvest.arweave4s
+package co.copperexchange.ar
 
 import cats.evidence.As
 import cats.data.NonEmptyList
@@ -7,8 +7,8 @@ import cats.syntax.applicativeError._
 import cats.syntax.flatMap._
 import cats.instances.future._
 import cats.{Id, MonadError, ~>}
-import co.upvest.arweave4s.utils.SttpExtensions.{PartialRequest, completeRequest}
-import co.upvest.arweave4s.utils.MultipleHostsBackend
+import co.copperexchange.ar.utils.SttpExtensions.{PartialRequest, completeRequest}
+import co.copperexchange.ar.utils.MultipleHostsBackend
 import com.softwaremill.sttp.{DeserializationError, Response, SttpBackend, Uri}
 import io.circe
 
@@ -19,7 +19,7 @@ package object api {
   type JsonHandler[F[_]] = λ[α => F[SttpResponse[α]]] ~> F
   type EncodedStringHandler[F[_]] = λ[α => F[Response[Option[α]]]] ~> F
   type SuccessHandler[F[_]] = F[Response[Unit]] => F[Unit]
-  type SttpResponse[A] = Response[Either[DeserializationError[circe.Error], A]]
+  private type SttpResponse[A] = Response[Either[DeserializationError[circe.Error], A]]
 
   trait Backend[F[_]] {
     def apply[T](r: PartialRequest[T, Nothing]): F[Response[T]]
@@ -28,10 +28,6 @@ package object api {
   object Backend {
     implicit def fromMHB[R[_], G[_]](mhb: MultipleHostsBackend[R, G]): Backend[R] = new Backend[R] {
       def apply[T](r: PartialRequest[T, Nothing]): R[Response[T]] = mhb(r)
-    }
-
-    def lift[F[_], G[_]](backend: Backend[G], i: G ~> F) = new Backend[F] {
-      override def apply[T](r: PartialRequest[T, Nothing]): F[Response[T]] = i(backend(r))
     }
   }
 
@@ -58,47 +54,6 @@ package object api {
   case class MultipleUnderlyingFailures(nel: NonEmptyList[Throwable])
     extends Failure("Multiple underlying failures", Some(nel.head))
 
-  trait MonadErrorInstances {
-    implicit def monadErrorJsonHandler[F[_]: MonadError[?[_], T], T](
-      implicit as: Failure As T
-    ): JsonHandler[F] = new (λ[α => F[SttpResponse[α]]] ~> F) {
-      override def apply[A](fa: F[SttpResponse[A]]): F[A] =
-        fa >>= { rsp =>
-          rsp.body match {
-            case Left(_) => as.coerce(HttpFailure(rsp)).raiseError
-            case Right(Left(e)) => as.coerce(DecodingFailure(e.error)).raiseError
-            case Right(Right(a)) => a.pure[F]
-          }
-        }
-    }
-
-    implicit def monadErrorEncodedStringHandler[F[_]: MonadError[?[_], T], T](
-      implicit as: Failure As T
-    ): EncodedStringHandler[F] = new (λ[α => F[Response[Option[α]]]] ~> F){
-      override def apply[A](fa: F[Response[Option[A]]]): F[A] =
-        fa >>= { rsp =>
-          rsp.body match {
-          case Left(_) => as.coerce(HttpFailure(rsp)).raiseError
-          case Right(None) => as.coerce(InvalidEncoding).raiseError
-          case Right(Some(a)) => a.pure[F]
-        }
-      }
-    }
-
-    implicit def monadErrorSuccessHandler[F[_]: MonadError[?[_], T], T](
-      implicit as: Failure As T
-    ): SuccessHandler[F] = {
-      _ >>= { rsp =>
-        rsp.body match {
-          case Left(_) => as.coerce(HttpFailure(rsp)).raiseError
-          case Right(_) => ().pure[F]
-        }
-      }
-    }
-  }
-
-  object monadError extends MonadErrorInstances
-
   trait IdInstances {
     implicit def idJsonHandler: JsonHandler[Id] =
       new (λ[α => Id[SttpResponse[α]]] ~> Id) {
@@ -119,10 +74,9 @@ package object api {
     }
 
     implicit def idSuccessHandler: SuccessHandler[Id] = { rsp =>
-      rsp.body.right getOrElse { throw HttpFailure(rsp) }
+      rsp.body.left getOrElse { throw HttpFailure(rsp) }
     }
   }
-
 
   object id extends IdInstances
 

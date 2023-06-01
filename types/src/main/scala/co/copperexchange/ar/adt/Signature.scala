@@ -1,6 +1,6 @@
-package co.upvest.arweave4s.adt
+package co.copperexchange.ar.adt
 
-import co.upvest.arweave4s.utils.CryptoUtils
+import co.copperexchange.ar.utils.CryptoUtils
 
 class Signature(val bytes: Array[Byte]) extends Base64EncodedBytes
 

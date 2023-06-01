@@ -1,7 +1,8 @@
 package co.upvest.arweave4s.adt
 
+import co.copperexchange.ar.adt.Base64EncodedBytes
 import org.scalatest.prop.{Checkers, GeneratorDrivenPropertyChecks}
-import org.scalatest.{WordSpec, Matchers}
+import org.scalatest.{Matchers, WordSpec}
 
 class Base64EncodedBytesSpec extends WordSpec with Matchers with Checkers with GeneratorDrivenPropertyChecks {
   class Foo(val bytes: Array[Byte]) extends Base64EncodedBytes

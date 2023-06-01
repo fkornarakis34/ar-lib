@@ -58,6 +58,7 @@ lazy val core = (project in file("core"))
       library.circeParser       % Compile,
       library.sttpCore          % Compile,
       library.sttpCirce         % Compile,
+      library.scalaCompile,
       // test dependencies
       library.scalaCheck        % "it",
       library.scalaTest         % "it",
@@ -80,13 +81,14 @@ lazy val root = (project in file("."))
 lazy val library =
   new {
     object Version {
-      val circe         = "0.11.1"
+      val circe         = "0.14.1"
       val scalaCheck    = "1.14.0"
-      val scalaTest     = "3.0.5"
-      val sttp          = "1.5.9"
+      val scalaTest     = "3.0.8"
+      val sttp          = "1.6.3"
       val spongyCastle  = "1.58.0.0"
-      val kindProjector = "0.9.9"
+      val kindProjector = "0.13.2"
       val logback       = "1.2.3"
+      val scalaComp = "2.13.6"
     }
     val circeCore           = "io.circe"                   %% "circe-core"                       % Version.circe
     val circeParser         = "io.circe"                   %% "circe-parser"                     % Version.circe
@@ -96,8 +98,9 @@ lazy val library =
     val spongyCastleCore    = "com.madgag.spongycastle"    %  "core"                             % Version.spongyCastle
     val scalaCheck          = "org.scalacheck"             %% "scalacheck"                       % Version.scalaCheck
     val scalaTest           = "org.scalatest"              %% "scalatest"                        % Version.scalaTest
-    val kindProjector       = "org.spire-math"             %% "kind-projector"                   % Version.kindProjector
+    val kindProjector       = "org.typelevel"             % "kind-projector_2.13.10"         % Version.kindProjector
     val logback             = "ch.qos.logback"             %  "logback-classic"                  % Version.logback
+    val scalaCompile        = "org.scala-lang"             % "scala-compiler"                    % Version.scalaComp
 
 
     // All exclusions that should be applied to every module
@@ -108,34 +111,22 @@ lazy val library =
 // Settings
 // *****************************************************************************
 
-organization in ThisBuild := "co.upvest"
+organization in ThisBuild := "co.copperexchange"
 
 lazy val tagName = Def.setting{
   s"v${if (releaseUseGlobalVersion.value) (version in ThisBuild).value else version.value}"
 }
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.12.8",
-  organization := "co.upvest",
+  scalaVersion := "2.13.10",
+  organization := "co.copperexchange",
   scalacOptions ++= Seq(
     "-unchecked",
     "-deprecation",
     "-language:_",
-    "-target:jvm-1.8",
     "-encoding", "UTF-8",
     "-Xfatal-warnings",
-    "-Yno-adapted-args",
     "-Ywarn-dead-code",
-    "-Ywarn-inaccessible",
-    "-Ywarn-infer-any",
-    "-Ywarn-nullary-override",
-    "-Ywarn-nullary-unit",
-    "-Ywarn-unused-import",
-    "-Ypartial-unification",
-    "-Xmacro-settings:materialize-derivations",
-    "-Xfuture",
-    "-Ycache-plugin-class-loader:last-modified",
-    "-Ycache-macro-class-loader:last-modified"
   ),
   scalacOptions in (Compile, console) ~= {
     _ filterNot (_ == "-Ywarn-unused-import")

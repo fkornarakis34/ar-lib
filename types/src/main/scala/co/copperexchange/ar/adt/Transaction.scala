@@ -1,6 +1,6 @@
-package co.upvest.arweave4s.adt
+package co.copperexchange.ar.adt
 
-import co.upvest.arweave4s.utils.CryptoUtils
+import co.copperexchange.ar.utils.CryptoUtils
 
 final case class Transaction(
   lastTx: Option[Transaction.Id],
@@ -9,7 +9,7 @@ final case class Transaction(
   data: Option[Base64EncodedBytes],
   tags: Option[Seq[Tag.Custom]],
   target: Option[Address],
-  quantity: Winston,
+  quantity: Winston
 ) extends Signable {
   lazy val signingData = Array.concat(
     owner.bytes,
@@ -56,7 +56,7 @@ object Transaction {
     owner: Owner,
     reward: Winston,
     target: Address,
-    quantity: Winston,
+    quantity: Winston
   ): Transaction = Transaction(
     lastTx,
     owner,

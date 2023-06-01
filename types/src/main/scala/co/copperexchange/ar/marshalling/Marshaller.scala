@@ -1,14 +1,19 @@
-package co.upvest.arweave4s.marshalling
+package co.copperexchange.ar.marshalling
 
-import co.upvest.arweave4s.adt.{Transaction, _}
-import co.upvest.arweave4s.utils.{CirceComplaints, CryptoUtils, EmptyStringAsNone}
+import co.copperexchange.ar.adt.{Transaction, _}
+import co.copperexchange.ar.utils.{CirceComplaints, CryptoUtils, EmptyStringAsNone}
 import cats.syntax.option._
 import io.circe.syntax._
 import cats.syntax.flatMap._
 import cats.instances.either._
 import io.circe._
-
 import scala.util.Try
+
+import co.copperexchange.ar.adt.{Address, Base64EncodedBytes, Owner, Peer, Query, Signature, Tag, Transaction, WalletResponse}
+import co.copperexchange.ar.adt.Tag.Custom
+import co.copperexchange.ar.adt.Transaction.Id
+import Tag.Custom
+import Transaction.Id
 
 trait Marshaller {
   import CirceComplaints._
@@ -17,7 +22,7 @@ trait Marshaller {
 
   val mapEmptyString = (s: String) => EmptyStringAsNone.of(s).toOption match {
     case None => Some(None)
-    case Some(s) => Transaction.Id.fromEncoded(s) map (_.some)
+    case Some(s) => Id.fromEncoded(s) map (_.some)
   }
 
   val winstonMapper = (s: String) => Try { Winston.apply(s) } toOption
@@ -72,7 +77,7 @@ trait Marshaller {
   implicit lazy val dataDecoder: Decoder[Data] =
     _.as[String] map Data.fromEncoded orComplain
 
-  implicit lazy val transactionIdDecoder: Decoder[Transaction.Id] =
+  implicit lazy val transactionIdDecoder: Decoder[Id] =
     _.as[String] map Transaction.Id.fromEncoded orComplain
 
   implicit def base64EncodedBytesEncoder[T <: Base64EncodedBytes]: Encoder[T] =
@@ -84,13 +89,13 @@ trait Marshaller {
   case class NoneAsEmptyStringDecoder[T: Decoder](t: T)
 
   object TagsInTransaction {
-    lazy implicit val encoder: Encoder[Tag.Custom] = ct =>
+    lazy implicit val encoder: Encoder[Custom] = ct =>
       Json.obj(
         "name"  := CryptoUtils.base64UrlEncode(ct.name),
         "value" := CryptoUtils.base64UrlEncode(ct.value)
       )
 
-    lazy implicit val decoder: Decoder[Tag.Custom] = c => for {
+    lazy implicit val decoder: Decoder[Custom] = c => for {
       n <- (c.downField("name").as[String]
         map CryptoUtils.base64UrlDecode
         orComplain

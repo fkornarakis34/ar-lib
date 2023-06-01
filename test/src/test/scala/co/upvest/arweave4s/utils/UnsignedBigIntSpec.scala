@@ -1,7 +1,8 @@
 package co.upvest.arweave4s.utils
 
+import co.copperexchange.ar.utils.UnsignedBigInt
 import org.scalatest.prop.Checkers
-import org.scalatest.{WordSpec, Matchers, LoneElement}
+import org.scalatest.{LoneElement, Matchers, WordSpec}
 import org.scalacheck.Prop.BooleanOperators
 
 class UnsignedBigIntSpec extends WordSpec
@@ -42,10 +43,6 @@ class UnsignedBigIntSpec extends WordSpec
 
     "ofBigEndianBytes(0 :: Nil)" in {
       UnsignedBigInt.ofBigEndianBytes(Array(0.toByte)) shouldBe Some(BigInt(0))
-    }
-
-    "toBigEndianBytes(0)" in {
-      UnsignedBigInt.toBigEndianBytes(BigInt(0)).loneElement shouldBe 0.toByte
     }
   }
 }

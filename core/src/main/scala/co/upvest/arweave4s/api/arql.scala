@@ -1,14 +1,14 @@
-package co.upvest.arweave4s.api
+package co.copperexchange.ar.api
 
-import co.upvest.arweave4s.adt.{Query, Transaction}
-import co.upvest.arweave4s.marshalling.Marshaller
+import co.copperexchange.ar.adt.{Query, Transaction}
+import co.copperexchange.ar.marshalling.Marshaller
 import com.softwaremill.sttp.circe.{asJson, _}
 import com.softwaremill.sttp.sttp
 
 object arql {
+import Marshaller._
+import co.copperexchange.ar.utils.SttpExtensions.syntax._
 
-  import Marshaller._
-  import co.upvest.arweave4s.utils.SttpExtensions.syntax._
 
   def apply[F[_]](q: Query)(implicit send: Backend[F], jh: JsonHandler[F]): F[Seq[Transaction.Id]] =
     jh(

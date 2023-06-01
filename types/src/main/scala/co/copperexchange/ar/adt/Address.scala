@@ -1,8 +1,9 @@
-package co.upvest.arweave4s.adt
+package co.copperexchange.ar.adt
 
 import java.security.interfaces.RSAKey
-import co.upvest.arweave4s.utils.{CryptoUtils, UnsignedBigInt}
 import scala.util.Try
+
+import co.copperexchange.ar.utils.{CryptoUtils, UnsignedBigInt}
 
 class Address protected (val bytes: Array[Byte]) extends Base64EncodedBytes
 
