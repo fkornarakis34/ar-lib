@@ -1,13 +1,13 @@
-package co.copperexchange.ar.api
+package co.copperexchange.arweave4s.api
 
-import co.copperexchange.ar.adt.Peer
+import co.copperexchange.arweave4s.adt.Peer
 import com.softwaremill.sttp.circe.asJson
 import com.softwaremill.sttp.sttp
-import co.copperexchange.ar.marshalling.Marshaller
+import co.copperexchange.arweave4s.marshalling.Marshaller
 
 object peers {
   import Marshaller._
-  import co.copperexchange.ar.utils.SttpExtensions.syntax._
+  import co.copperexchange.arweave4s.utils.SttpExtensions.syntax._
   def apply[F[_]]()(implicit send: Backend[F], jh: JsonHandler[F]): F[List[Peer]] = jh(
     send(sttp.get("peers" :: Nil) response asJson[List[Peer]])
   )

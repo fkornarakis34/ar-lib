@@ -1,11 +1,11 @@
-package co.copperexchange.ar.api
+package co.copperexchange.arweave4s.api
 
 import cats.Monad
 import cats.syntax.applicative._
 import cats.syntax.flatMap._
 import cats.syntax.functor._
-import co.copperexchange.ar.adt.{Signed, Transaction}
-import co.copperexchange.ar.marshalling.Marshaller
+import co.copperexchange.arweave4s.adt.{Signed, Transaction}
+import co.copperexchange.arweave4s.marshalling.Marshaller
 import com.softwaremill.sttp.circe._
 import com.softwaremill.sttp.{DeserializationError, asString, sttp}
 import io.circe.parser.decode
@@ -13,7 +13,7 @@ import cats.syntax.either._
 
 object tx {
   import Marshaller._
-  import co.copperexchange.ar.utils.SttpExtensions.syntax._
+  import co.copperexchange.arweave4s.utils.SttpExtensions.syntax._
 
   def get[F[_] : Monad](txId: Transaction.Id)(implicit send: Backend[F], jh: JsonHandler[F]):
     F[Transaction.WithStatus] = send(sttp.get("tx" :: s"$txId" :: Nil)

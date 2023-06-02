@@ -1,4 +1,4 @@
-package co.copperexchange.ar.utils
+package co.copperexchange.arweave4s.utils
 
 import cats.Id
 import com.softwaremill.sttp.{Empty, Request, RequestT, Uri, Method => SMethod}

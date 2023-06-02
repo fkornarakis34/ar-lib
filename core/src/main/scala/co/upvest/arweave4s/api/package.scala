@@ -1,4 +1,4 @@
-package co.copperexchange.ar
+package co.copperexchange.arweave4s
 
 import cats.evidence.As
 import cats.data.NonEmptyList
@@ -7,8 +7,8 @@ import cats.syntax.applicativeError._
 import cats.syntax.flatMap._
 import cats.instances.future._
 import cats.{Id, MonadError, ~>}
-import co.copperexchange.ar.utils.SttpExtensions.{PartialRequest, completeRequest}
-import co.copperexchange.ar.utils.MultipleHostsBackend
+import co.copperexchange.arweave4s.utils.SttpExtensions.{PartialRequest, completeRequest}
+import co.copperexchange.arweave4s.utils.MultipleHostsBackend
 import com.softwaremill.sttp.{DeserializationError, Response, SttpBackend, Uri}
 import io.circe
 
