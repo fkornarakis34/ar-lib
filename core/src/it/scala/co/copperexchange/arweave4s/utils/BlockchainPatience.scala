@@ -1,4 +1,4 @@
-package co.upvest.arweave4s.utils
+package co.copperexchange.arweave4s.utils
 
 import org.scalatest.concurrent.AbstractPatienceConfiguration
 import org.scalatest.time.SpanSugar

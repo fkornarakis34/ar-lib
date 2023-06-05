@@ -2,9 +2,9 @@
 
 import ammonite.ops._
 
-import $ivy.`co.upvest::arweave4s-core:0.15.0`
-import co.upvest.arweave4s.adt._
-import co.upvest.arweave4s.api
+import $ivy.`co.copperexchange::arweave4s-core:0.15.0`
+import co.copperexchange.arweave4s.adt._
+import co.copperexchange.arweave4s.api
 import com.softwaremill.sttp.{HttpURLConnectionBackend, UriContext}
 import cats.Id
 

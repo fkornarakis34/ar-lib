@@ -1,4 +1,4 @@
-package co.upvest.arweave4s
+package co.copperexchange.arweave4s
 
 import cats.arrow.FunctionK
 import cats.data.{EitherT, NonEmptyList}

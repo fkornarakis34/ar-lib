@@ -12,7 +12,7 @@ import org.scalatest.{Tag => _, _}
 
 import scala.concurrent.{ExecutionContext, Future}
 import co.copperexchange.arweave4s.api.address
-import co.upvest.arweave4s.utils.BlockchainPatience
+import co.copperexchange.arweave4s.utils.BlockchainPatience
 
 class apiExamples extends WordSpec
   with Matchers with GivenWhenThen with Eventually

@@ -12,7 +12,7 @@ lazy val types = (project in file("types"))
     moduleName := "arweave4s-types",
     name := "Arweave4s Types",
     buildInfoKeys := Seq[BuildInfoKey](version, scalaVersion, sbtVersion),
-    buildInfoPackage := "co.upvest.arweave4s",
+    buildInfoPackage := "co.copperexchange.arweave4s",
     libraryDependencies ++= Seq(
       library.circeCore % Compile,
       library.circeParser % Compile,
@@ -30,7 +30,7 @@ lazy val test = (project in file("test"))
     moduleName := "arweave4s-test",
     name := "Arweave4s Tests",
     buildInfoKeys := Seq[BuildInfoKey](version, scalaVersion, sbtVersion),
-    buildInfoPackage := "co.upvest.arweave4s",
+    buildInfoPackage := "co.copperexchange.arweave4s",
     libraryDependencies ++= Seq(
       library.scalaTest % Test,
       library.scalaCheck % Compile,
@@ -49,7 +49,7 @@ lazy val core = (project in file("core"))
     moduleName := "arweave4s-core",
     name := "Arweave4s Core",
     buildInfoKeys := Seq[BuildInfoKey](version, scalaVersion, sbtVersion),
-    buildInfoPackage := "co.upvest.arweave4s",
+    buildInfoPackage := "co.copperexchange.arweave4s",
     libraryDependencies ++= Seq(
       // compiler plugins
       compilerPlugin(library.kindProjector),
